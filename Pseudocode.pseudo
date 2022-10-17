@@ -1,0 +1,70 @@
+1D_Object_Detection
+
+enum mics = {mic_1 = 2, mic_2 = 1, false = 0);
+
+start()
+{
+    //buffers to hold the respective values
+    int first_to_trigger = 0
+    int second_to_trigger = 0
+
+    //initialize mics if necessary
+	init_mics()
+
+    //run till kindom come
+    while (1)
+    {
+        //hold which mic was triggered first
+        first_to_trigger = poll_mics()
+        //Check if a mic has been triggered true case
+        if (first_to_trigger)
+        {
+            //start timer
+            start_timer();
+            //check for second mic has been triggered
+            //ignore false alarms or echos
+            do
+            {
+                //ignore
+                second_to_trigger = poll_mics()
+            } while (first_to_trigger == second_to_trigger);
+
+            stop_timer();
+            t = timer.counter
+
+            df = 330m/s * t
+
+            d1 = (Dt - Df)/2
+
+            d2 = dt - d1
+
+            witch (first_to_trigger)
+            {
+                case 2:
+                    printf("Distance to mic 1: %f", d1)
+                    printf("Distance to mic 2: %f", d2)
+                    break
+                case 1:
+                    printf("Distance to mic 1: %f", d2)
+                    printf(s"Distance to mic 2: %f", d1)
+                    break
+                default:
+                    printf("ERROR")
+                    break
+            }
+        }
+    }
+}
+
+bool poll_mics()
+{0p
+    if (mic_1_input == 1)
+    {
+        return mic_1
+    }
+    if (mic_2_input == 1)
+    {
+        return mic_2
+    }
+    return false
+}

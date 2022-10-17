@@ -1,0 +1,84 @@
+
+
+setup()
+{
+    init_mic1_interrupt();
+    init_mic2_interrupt();
+}
+
+//Global flag to detect when mic one ISR has run
+global bool mic1_triggered = 0;
+//Global flag to detect when mic two ISR has run
+global bool mic2_triggered = 0;
+
+start()
+{
+    while(1)
+    {
+        //Wait for mic to be triggered
+        while(!(mic1_triggered || mic2_triggered))
+        {
+            printf("Waiting for sound")
+        }
+        printf("Calculating...")
+        if (mic_1_triggered && mic_2_triggered)
+        {
+            Get_Distance and present(timer.count);
+            timer.reset();
+            if(first_to_trigger == mic1)
+            {
+                printf("Distance to mic 1: %f", d1)
+                printf(s"Distance to mic 2: %f", d2)
+            }
+            else
+            {
+                printf("Distance to mic 1: %f", d2)
+                printf(s"Distance to mic 2: %f", d1)
+            }
+            mic_1_triggered = 0;
+            mic_2_triggered = 0;
+        }
+    }
+}
+
+void mic1_ISR()
+{
+    disable_all_interrupts();
+    mic1_triggered = 1;
+    if (!mic_2_triggered)
+    {
+        first_to_trigger = mic1;
+        start_timer();
+    }
+    else
+    {
+        stop_timer();
+    }
+    enable_all_interrupts();
+}
+
+void mic2_ISR()
+{
+    disable_all_interrupts();
+    mic_2_triggered = 1;
+    if (!mic_1_triggered)
+    {
+        first_to_trigger = mic2;'
+        start_timer();
+    }
+    else
+    {
+        stop_timer();
+    }
+    enable_all_interrupts();
+}
+
+
+void Get_Distance and present(float t)
+{
+    //perform calc
+    df = 330m/s * t
+    d1 = (Dt - Df)/2
+    d2 = dt - d1
+    return d1, d2
+}
